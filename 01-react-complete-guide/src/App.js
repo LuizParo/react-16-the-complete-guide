@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 
 import Person from './Person/Person';
 
@@ -87,13 +87,15 @@ class App extends Component {
         }
 
         return (
-            <div className="App">
-                <h1>Hi I'm a Reat App</h1>
-                <p className={classes.join(' ')}>This is really working!</p>
-                <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
+            <StyleRoot>
+                <div className="App">
+                    <h1>Hi I'm a Reat App</h1>
+                    <p className={classes.join(' ')}>This is really working!</p>
+                    <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
 
-                {persons}
-            </div>
+                    {persons}
+                </div>
+            </StyleRoot>
         );
     }
 }
