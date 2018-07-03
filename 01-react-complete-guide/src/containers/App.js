@@ -12,12 +12,31 @@ class App extends Component {
         console.log('[App.js] Inside constructor', props);
     }
 
+    // ======= COMPONENT CREATION LIFECYCLE HOOKS =======
     componentWillMount() {
         console.log('[App.js] Inside componentWillMount()');
     }
 
     componentDidMount() {
         console.log('[App.js] Inside componentDidMount()');
+    }
+
+    // ======= COMPONENT UPDATING LIFECYCLE HOOKS =======
+    componentWillReceiveProps(nextProps) {
+        console.log('[UPDATE App.js] Inside componentWillReceiveProps()', nextProps);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[UPDATE App.js] Inside shouldComponentUpdate()', nextProps, nextState);
+        return true;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log('[UPDATE App.js] Inside componentWillUpdate()', nextProps, nextState);
+    }
+
+    componentDidUpdate() {
+        console.log('[UPDATE App.js] Inside componentDidUpdate()');
     }
 
     state = {
