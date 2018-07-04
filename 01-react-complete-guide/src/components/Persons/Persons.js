@@ -7,6 +7,8 @@ export default class Persons extends PureComponent {
     constructor(props) {
         super(props);
         console.log('[Persons.js] Inside constructor', props);
+
+        this.lastPersonRef = React.createRef();
     }
 
     // ======= COMPONENT CREATION LIFECYCLE HOOKS =======
@@ -16,6 +18,7 @@ export default class Persons extends PureComponent {
 
     componentDidMount() {
         console.log('[Persons.js] Inside componentDidMount()');
+        this.lastPersonRef.current.focus();
     }
 
     // ======= COMPONENT UPDATING LIFECYCLE HOOKS =======
@@ -44,6 +47,7 @@ export default class Persons extends PureComponent {
 
         return this.props.persons.map((person, index) => (
             <Person
+                ref={this.lastPersonRef}
                 key={person.id}
                 position={index}
                 name={person.name}
