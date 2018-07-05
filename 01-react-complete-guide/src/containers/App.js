@@ -17,6 +17,7 @@ class App extends PureComponent {
     }
 
     // ======= COMPONENT CREATION LIFECYCLE HOOKS =======
+    // Discouraged by React 16+
     componentWillMount() {
         console.log('[App.js] Inside componentWillMount()');
     }
@@ -26,6 +27,7 @@ class App extends PureComponent {
     }
 
     // ======= COMPONENT UPDATING LIFECYCLE HOOKS =======
+    // Discouraged by React 16+
     componentWillReceiveProps(nextProps) {
         console.log('[UPDATE App.js] Inside componentWillReceiveProps()', nextProps);
     }
@@ -37,8 +39,20 @@ class App extends PureComponent {
     //         nextState.showPersons !== this.state.showPersons;
     // }
 
+    // Discouraged by React 16+
     componentWillUpdate(nextProps, nextState) {
         console.log('[UPDATE App.js] Inside componentWillUpdate()', nextProps, nextState);
+    }
+
+    // React 16+ - Called when the props change. It's used to merge the props with the state.
+    static getDerivedStateFromProps(nextProps, prevState) {
+        console.log('[UPDATE App.js] Inside getDerivedStateFromProps()', nextProps, prevState);
+        return prevState;
+    }
+
+    // React 16+ - Called whenever the DOM gets updated.
+    getSnapshotBeforeUpdate() {
+        console.log('[UPDATE App.js] Inside getSnapshotBeforeUpdate()');
     }
 
     componentDidUpdate() {
