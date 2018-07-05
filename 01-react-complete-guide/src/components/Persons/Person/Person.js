@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { AuthContext } from '../../../containers/App';
 import withClass from '../../../hoc/withClass';
 
 import classes from './Person.css';
@@ -34,6 +35,10 @@ class Person extends Component {
 
         return (
             <Fragment>
+                <AuthContext.Consumer>
+                    {auth => auth ? <p>I'm authenticated</p> : null}
+                </AuthContext.Consumer>
+
                 <p onClick={this.props.click}>I'm a {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
 
