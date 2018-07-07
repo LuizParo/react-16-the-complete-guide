@@ -1,14 +1,15 @@
 import React from 'react';
 
 import BuildControl from './BuildControl/BuildControl';
+import { SALAD, BACON, CHEESE, MEAT } from '../BurgerIngredient/BurgerIngredient';
 
 import classes from './BuildControls.css';
 
 const controls = [
-    { label : 'Salad', type : 'salad' },
-    { label : 'Bacon', type : 'bacon' },
-    { label : 'Cheese', type : 'cheese' },
-    { label : 'Meat', type : 'meat' },
+    { label : 'Salad', type : SALAD },
+    { label : 'Bacon', type : BACON },
+    { label : 'Cheese', type : CHEESE },
+    { label : 'Meat', type : MEAT },
 ];
 
 const BuildControls = props => (

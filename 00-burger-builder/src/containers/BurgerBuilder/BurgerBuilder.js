@@ -2,22 +2,23 @@ import React, { Component, Fragment } from 'react';
 
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Burger from '../../components/Burger/Burger';
+import { SALAD, BACON, CHEESE, MEAT } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 
 const INGREDIENT_PRICES = {
-    salad : 0.5,
-    cheese : 0.4,
-    meat : 1.3,
-    bacon : 0.7
+    [SALAD] : 0.5,
+    [CHEESE] : 0.4,
+    [MEAT] : 1.3,
+    [BACON] : 0.7
 };
 
 class BurgerBuilder extends Component {
 
     state = {
         ingredients : {
-            salad : 0,
-            bacon : 0,
-            cheese : 0,
-            meat : 0
+            [SALAD] : 0,
+            [BACON] : 0,
+            [CHEESE] : 0,
+            [MEAT] : 0
         },
         totalPrice : 4
     }
