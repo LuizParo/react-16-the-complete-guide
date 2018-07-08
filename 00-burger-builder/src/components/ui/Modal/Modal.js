@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+import Backdrop from '../Backdrop/Backdrop';
 
 import classes from './Modal.css';
 
@@ -9,9 +11,13 @@ const Modal = props => {
     };
 
     return (
-        <div className={classes.Modal} style={style}>
-            {props.children}
-        </div>
+        <Fragment>
+            <Backdrop show={props.show} clicked={props.modalClosed} />
+
+            <div className={classes.Modal} style={style}>
+                {props.children}
+            </div>
+        </Fragment>
     );
 };
 
