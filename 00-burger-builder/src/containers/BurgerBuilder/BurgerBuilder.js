@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Burger from '../../components/Burger/Burger';
 import { SALAD, BACON, CHEESE, MEAT } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
+import Modal from '../../components/ui/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
     [SALAD] : 0.5,
@@ -79,6 +81,10 @@ class BurgerBuilder extends Component {
 
         return (
             <Fragment>
+                <Modal>
+                    <OrderSummary ingredients={this.state.ingredients} />
+                </Modal>
+
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls price={this.state.totalPrice}
                     purchasable={this.state.purchasable}
