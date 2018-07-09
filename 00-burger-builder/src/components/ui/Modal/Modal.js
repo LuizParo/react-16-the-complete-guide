@@ -1,24 +1,37 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import Backdrop from '../Backdrop/Backdrop';
 
 import classes from './Modal.css';
 
-const Modal = props => {
-    const style = {
-        transform : props.show ? 'translateY(0)' : 'translateY(-100vh)',
-        opacity : props.show ? '1' : '0'
-    };
+class Modal extends Component {
 
-    return (
-        <Fragment>
-            <Backdrop show={props.show} clicked={props.modalClosed} />
+    // PureComponent would be good also.
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[Modal.js] shouldComponentUpdate');
+        return nextProps.show !== this.props.show;
+    }
 
-            <div className={classes.Modal} style={style}>
-                {props.children}
-            </div>
-        </Fragment>
-    );
+    componentWillUpdate() {
+        console.log('[Modal.js] componentWillUpdate');
+    }
+
+    render() {
+        const style = {
+            transform : this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+            opacity : this.props.show ? '1' : '0'
+        };
+
+        return (
+            <Fragment>
+                <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
+
+                <div className={classes.Modal} style={style}>
+                    {this.props.children}
+                </div>
+            </Fragment>
+        );
+    }
 };
 
 export default Modal;
