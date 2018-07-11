@@ -4,7 +4,12 @@ import './FullPost.css';
 
 class FullPost extends Component {
     render () {
-        let post = <p>Please select a Post!</p>;
+        let post = <p style={{ textAlign : 'center' }}>Please select a Post!</p>;
+
+        if (!this.props.id) {
+            return post;
+        }
+
         post = (
             <div className="FullPost">
                 <h1>Title</h1>
