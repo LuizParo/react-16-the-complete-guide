@@ -19,7 +19,7 @@ class NewPost extends Component {
             author
         };
 
-        axios.post('http://jsonplaceholder.typicode.com/posts', post)
+        axios.post('/posts', post)
             .then(console.log);
     }
 

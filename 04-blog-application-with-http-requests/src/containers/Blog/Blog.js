@@ -14,7 +14,7 @@ class Blog extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://jsonplaceholder.typicode.com/posts')
+        axios.get('/posts')
             .then(response => response.data.slice(0, 4))
             .then(posts => posts.map(post => ({ ...post, author : 'Max' })))
             .then(updatedPosts => this.setState({ posts : updatedPosts }))
