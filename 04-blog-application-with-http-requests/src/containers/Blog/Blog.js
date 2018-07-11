@@ -14,12 +14,9 @@ class Blog extends Component {
 
     componentDidMount() {
         axios.get('http://jsonplaceholder.typicode.com/posts')
-            .then(response => {
-                const posts = response.data.slice(0, 4);
-                const updatedPosts = posts.map(post => ({ ...post, author : 'Max' }));
-
-                this.setState({ posts : updatedPosts })
-            });
+            .then(response => response.data.slice(0, 4))
+            .then(posts => posts.map(post => ({ ...post, author : 'Max' })))
+            .then(updatedPosts => this.setState({ posts : updatedPosts }));
     }
 
     postSelectedHandler = id => {
