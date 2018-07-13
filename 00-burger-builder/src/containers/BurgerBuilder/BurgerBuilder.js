@@ -21,16 +21,18 @@ const INGREDIENT_PRICES = {
 class BurgerBuilder extends Component {
 
     state = {
-        ingredients : {
-            [SALAD] : 0,
-            [BACON] : 0,
-            [CHEESE] : 0,
-            [MEAT] : 0
-        },
+        ingredients : null,
         totalPrice : 4,
         purchasable : false,
         purchasing : false,
-        loading : false
+        loading : false,
+        error : false
+    }
+
+    componentDidMount() {
+        axios.get('/ingredients.json')
+            .then(response => this.setState({ ingredients : response.data }))
+            .catch(error => this.setState({ error : true }));
     }
 
     updatePurchasedState = ingredients => {
@@ -113,7 +115,7 @@ class BurgerBuilder extends Component {
     }
 
     _renderOrderSummary() {
-        if (this.state.loading) {
+        if (this.state.loading || !this.state.ingredients) {
             return <Spinner />;
         }
 
@@ -123,7 +125,11 @@ class BurgerBuilder extends Component {
             purchaseContinued={this.purchaseContinueHandler} />;
     }
 
-    render() {
+    _renderBurger() {
+        if (!this.state.ingredients) {
+            return this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
+        }
+
         const disabledInfo = { ...this.state.ingredients };
 
         for (const info in disabledInfo) {
@@ -132,17 +138,26 @@ class BurgerBuilder extends Component {
 
         return (
             <Fragment>
-                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-                    {this._renderOrderSummary()}
-                </Modal>
-
                 <Burger ingredients={this.state.ingredients} />
+
                 <BuildControls price={this.state.totalPrice}
                     purchasable={this.state.purchasable}
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemoved={this.removeIngredientHandler}
                     ordered={this.purchaseHandler}
                     disabled={disabledInfo} />
+            </Fragment>
+        );
+    }
+
+    render() {
+        return (
+            <Fragment>
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+                    {this._renderOrderSummary()}
+                </Modal>
+
+                {this._renderBurger()}
             </Fragment>
         );
     }
