@@ -15,6 +15,8 @@ class Posts extends Component {
     }
 
     componentDidMount() {
+        console.log('[Posts.js] componentDidMount with props: ', this.props);
+
         axios.get('/posts')
             .then(response => response.data.slice(0, 4))
             .then(posts => posts.map(post => ({ ...post, author : 'Max' })))
