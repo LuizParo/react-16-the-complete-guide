@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import './Post.css';
 
 const Post = props => {
-    console.log('[Post.js] with router related props: ', props);
+    //console.log('[Post.js] with router related props: ', props);
 
     return (
         <article className="Post" onClick={props.clicked}>
