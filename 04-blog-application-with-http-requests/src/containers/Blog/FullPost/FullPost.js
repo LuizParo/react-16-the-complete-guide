@@ -5,30 +5,35 @@ import './FullPost.css';
 
 class FullPost extends Component {
     state = {
-        loadedPost : {}
+        loadedPost : {},
+        errorMessage : ''
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.id && prevProps.id !== this.props.id) {
-            axios.get(`/posts/${this.props.id}`)
-                .then(response => this.setState({ loadedPost : response.data }));
+    componentDidMount() {
+        console.log('[FullPost.js] componentDidUpdate with props: ', this.props);
+
+        const idPost = this.props.match.params.id;
+        if (idPost) {
+            axios.get(`/posts/${idPost}`)
+                .then(response => this.setState({ loadedPost : response.data }))
+                .catch(error => this.setState({ errorMessage : error.message }));
         }
     }
 
     deletePostHandler = () => {
         axios.delete(`/posts/${this.props.id}`)
-            .then(console.log);
+            .then(console.log)
+            .catch(error => this.setState({ errorMessage : error.message }));
     }
 
     render () {
-        let post = <p style={{ textAlign : 'center' }}>Please select a Post!</p>;
-
-        if (!this.props.id) {
-            return post;
+        if (this.state.errorMessage) {
+            return <p>Something went wrong: {this.state.errorMessage}</p>;
         }
 
         const { loadedPost } = this.state;
-        post = (
+
+        return (
             <div className="FullPost">
                 <h1>{loadedPost.title}</h1>
                 <p>{loadedPost.body}</p>
@@ -36,9 +41,7 @@ class FullPost extends Component {
                     <button className="Delete" onClick={this.deletePostHandler}>Delete</button>
                 </div>
             </div>
-
         );
-        return post;
     }
 }
 
