@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import Post from '../../../components/Post/Post';
 
@@ -24,12 +23,16 @@ class Posts extends Component {
             .catch(error => this.setState({ error : true, errorMessage : error.message }));
     }
 
+    postSelectedHandler = id => {
+        //this.props.history.push(`/${id}`);
+        this.props.history.push({ pathname : `/${id}` });
+    }
+
     _createPost = post => {
         return (
-            <Link key={post.id} to={`/${post.id}`}>
-                <Post title={post.title}
-                    author={post.author} />
-            </Link>
+            <Post key={post.id} title={post.title}
+                author={post.author}
+                clicked={() => this.postSelectedHandler(post.id)} />
         );
     }
 
