@@ -11,7 +11,18 @@ class FullPost extends Component {
 
     componentDidMount() {
         console.log('[FullPost.js] componentDidUpdate with props: ', this.props);
+        this._loadData();
+    }
 
+    componentDidUpdate(nextProps) {
+        console.log('[FullPost.js] componentDidUpdate with props: ', this.props);
+
+        if (nextProps.match.params.id !== this.props.match.params.id) {
+            this._loadData();
+        }
+    }
+
+    _loadData() {
         const idPost = this.props.match.params.id;
         if (idPost) {
             axios.get(`/posts/${idPost}`)
@@ -21,7 +32,7 @@ class FullPost extends Component {
     }
 
     deletePostHandler = () => {
-        axios.delete(`/posts/${this.props.id}`)
+        axios.delete(`/posts/${this.props.match.params.id}`)
             .then(console.log)
             .catch(error => this.setState({ errorMessage : error.message }));
     }
