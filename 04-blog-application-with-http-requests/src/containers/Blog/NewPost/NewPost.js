@@ -34,7 +34,6 @@ class NewPost extends Component {
     }
 
     render () {
-        let redirect = null;
         return (
             <div className="NewPost">
                 {this._renderRedirect()}
