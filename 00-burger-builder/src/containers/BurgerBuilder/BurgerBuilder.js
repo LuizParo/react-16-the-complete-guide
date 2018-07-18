@@ -90,28 +90,29 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({ loading : true });
+        this.props.history.push('/checkout');
+        // this.setState({ loading : true });
 
-        const order = {
-            ingredients : this.state.ingredients,
-            price : this.state.totalPrice,
-            customer : {
-                name : 'Luiz Paro',
-                address : {
-                    street : 'Test Street 1',
-                    zipCode : '41351',
-                    country : 'Brazil'
-                },
-                email : 'test@test.com'
-            },
-            deliveryMethod : 'fastest'
-        };
+        // const order = {
+        //     ingredients : this.state.ingredients,
+        //     price : this.state.totalPrice,
+        //     customer : {
+        //         name : 'Luiz Paro',
+        //         address : {
+        //             street : 'Test Street 1',
+        //             zipCode : '41351',
+        //             country : 'Brazil'
+        //         },
+        //         email : 'test@test.com'
+        //     },
+        //     deliveryMethod : 'fastest'
+        // };
 
-        axios.post('/orders.json', order)
-            .then(response => this.setState({ loading : false, purchasing : false }))
-            .catch(error => {
-                this.setState({ loading : false, purchasing : false });
-            });
+        // axios.post('/orders.json', order)
+        //     .then(response => this.setState({ loading : false, purchasing : false }))
+        //     .catch(error => {
+        //         this.setState({ loading : false, purchasing : false });
+        //     });
     }
 
     _renderOrderSummary() {
