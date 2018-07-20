@@ -5,17 +5,17 @@ import classes from './Input.css';
 const _renderInput = props => (
     <input className={classes.InputElement}
         {...props.elementConfig}
-        value={props.value} />
+        value={props.value} onChange={props.changed}  />
 );
 
 const _renderTextArea = props => (
     <textarea className={classes.InputElement}
         {...props.elementConfig}
-        value={props.value} />
+        value={props.value} onChange={props.changed}  />
 );
 
 const _renderSelect = props => (
-    <select className={classes.InputElement} value={props.value}>
+    <select className={classes.InputElement} value={props.value} onChange={props.changed} >
         {
             props.elementConfig.options.map(option => (
                 <option key={option.value} value={option.value}>
