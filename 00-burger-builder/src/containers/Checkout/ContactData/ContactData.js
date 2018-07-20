@@ -84,6 +84,24 @@ class ContactData extends Component {
             .catch(_ => this.setState({ loading : false }));
     }
 
+    _renderInputs() {
+        const formElementsArray = [];
+
+        for (let key in this.state.orderForm) {
+            formElementsArray.push({
+                id : key,
+                config : this.state.orderForm[key]
+            });
+        }
+
+        return formElementsArray.map(formElement => (
+            <Input key={formElement.id}
+                elementType={formElement.config.elementType}
+                elementConfig={formElement.config.elementConfig}
+                value={formElement.config.value} />
+        ));
+    }
+
     render() {
         if (this.state.loading) {
             return <Spinner />;
@@ -94,10 +112,7 @@ class ContactData extends Component {
                 <h4>Enter your Contact Data</h4>
 
                 <form>
-                    <Input elementType="..." elementConfig="..." value="..." />
-                    <Input inputtype="input" type="email" name="email" placeholder="Your email" />
-                    <Input inputtype="input" type="text" name="street" placeholder="Your street name" />
-                    <Input inputtype="input" type="text" name="postalCode" placeholder="Your postal code" />
+                    {this._renderInputs()}
 
                     <Button buttonType="Success" clicked={this.orderHandler}>ORDER</Button>
                 </form>
