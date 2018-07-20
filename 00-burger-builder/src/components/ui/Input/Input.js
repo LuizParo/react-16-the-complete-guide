@@ -2,28 +2,44 @@ import React from 'react';
 
 import classes from './Input.css';
 
-function _renderInput(props) {
-    return <input className={classes.InputElement}
-        {...props.elementConfig}
-        value={props.value} />;
-}
-
-function _renderTextArea(props) {
-    return <textarea className={classes.InputElement}
+const _renderInput = props => (
+    <input className={classes.InputElement}
         {...props.elementConfig}
         value={props.value} />
-}
+);
+
+const _renderTextArea = props => (
+    <textarea className={classes.InputElement}
+        {...props.elementConfig}
+        value={props.value} />
+);
+
+const _renderSelect = props => (
+    <select className={classes.InputElement} value={props.value}>
+        {
+            props.elementConfig.options.map(option => (
+                <option key={option.value} value={option.value}>
+                    {option.displayValue}
+                </option>
+            ))
+        }
+    </select>
+);
 
 const Input = props => {
     let inputElement = null;
 
     switch(props.elementType) {
         case 'input':
-            inputElement = _renderInput(props);
+            inputElement =  _renderInput(props);
             break;
 
         case 'textarea':
             inputElement = _renderTextArea(props);
+            break;
+
+        case 'select':
+            inputElement = _renderSelect(props);
             break;
 
         default:
