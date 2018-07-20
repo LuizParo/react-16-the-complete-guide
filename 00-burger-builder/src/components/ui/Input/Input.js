@@ -3,17 +3,21 @@ import React from 'react';
 import classes from './Input.css';
 
 function _renderInput(props) {
-    return <input className={classes.InputElement} {...props} />;
+    return <input className={classes.InputElement}
+        {...props.elementConfig}
+        value={props.value} />;
 }
 
 function _renderTextArea(props) {
-    return <textarea className={classes.InputElement} {...props} />
+    return <textarea className={classes.InputElement}
+        {...props.elementConfig}
+        value={props.value} />
 }
 
 const Input = props => {
     let inputElement = null;
 
-    switch(props.inputtype) {
+    switch(props.elementType) {
         case 'input':
             inputElement = _renderInput(props);
             break;
