@@ -112,7 +112,7 @@ class ContactData extends Component {
             .catch(_ => this.setState({ loading : false }));
     }
 
-    _checkValidity(value, rules) {
+    _checkValidity(value = '', rules = {}) {
         let isValid = true;
 
         if (rules.required) {
@@ -158,6 +158,8 @@ class ContactData extends Component {
                 elementType={formElement.config.elementType}
                 elementConfig={formElement.config.elementConfig}
                 value={formElement.config.value}
+                shouldValidate={formElement.config.validation}
+                invalid={!formElement.config.valid}
                 changed={event => this.inputChangedHandler(event, formElement.id)} />
         ));
     }
