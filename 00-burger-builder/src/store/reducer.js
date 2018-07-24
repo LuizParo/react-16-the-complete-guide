@@ -1,7 +1,14 @@
 import { ADD_INGREDIENT, REMOVE_INGREDIENT } from './actions';
 
+import { BACON, CHEESE, MEAT, SALAD } from '../components/Burger/BurgerIngredient/BurgerIngredient';
+
 const initialState = {
-    ingredients : [],
+    ingredients : {
+        [SALAD] : 0,
+        [CHEESE] : 0,
+        [MEAT] : 0,
+        [BACON] : 0
+    },
     totalPrice : 4
 };
 
