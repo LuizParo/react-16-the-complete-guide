@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import counterReducer from './store/reducers/counter';
@@ -11,6 +11,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const logger = store => next => action => {
     console.log('[Middleware] Dispatching', action);
@@ -26,7 +28,7 @@ const rootReducer = combineReducers({
     result : resultReducer
 });
 
-const store = createStore(rootReducer, applyMiddleware(logger));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)));
 
 ReactDOM.render(
     <Provider store={store}>
