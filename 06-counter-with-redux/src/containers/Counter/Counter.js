@@ -11,7 +11,7 @@ import {
     increment,
     storeResult,
     subtract
-} from '../../store/actions/actions';
+} from '../../store/actions';
 
 class Counter extends Component {
 
