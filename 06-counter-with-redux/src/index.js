@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import reduxThunk from 'redux-thunk';
 
 import counterReducer from './store/reducers/counter';
 import resultReducer from './store/reducers/result';
@@ -28,7 +29,7 @@ const rootReducer = combineReducers({
     result : resultReducer
 });
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, reduxThunk)));
 
 ReactDOM.render(
     <Provider store={store}>
