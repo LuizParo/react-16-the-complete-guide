@@ -1,6 +1,6 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from './actions';
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../actions/actionTypes';
 
-import { BACON, CHEESE, MEAT, SALAD } from '../components/Burger/BurgerIngredient/BurgerIngredient';
+import { BACON, CHEESE, MEAT, SALAD } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 
 const INGREDIENT_PRICES = {
     [SALAD] : 0.5,

@@ -7,7 +7,7 @@ import Modal from '../../components/ui/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/ui/Spinner/Spinner';
 
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../../store/actions';
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../../store/actions/actionTypes';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
