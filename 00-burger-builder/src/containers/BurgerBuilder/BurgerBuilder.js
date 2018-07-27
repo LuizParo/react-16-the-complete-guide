@@ -7,7 +7,7 @@ import Modal from '../../components/ui/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/ui/Spinner/Spinner';
 
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../../store/actions/actionTypes';
+import { addIngredient, removeIngredient } from '../../store/actions';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
@@ -101,8 +101,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onIngredientAdded : ingredientName => dispatch({ type : ADD_INGREDIENT, ingredientName }),
-    onIngredientRemoved : ingredientName => dispatch({ type : REMOVE_INGREDIENT, ingredientName })
+    onIngredientAdded : ingredientName => dispatch(addIngredient(ingredientName)),
+    onIngredientRemoved : ingredientName => dispatch(removeIngredient(ingredientName))
 });
 
 export default connect(
