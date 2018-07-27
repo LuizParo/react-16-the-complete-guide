@@ -12,7 +12,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
-const store = createStore(reducer);
+const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+);
 
 ReactDOM.render(
     <Provider store={store}>
