@@ -1,4 +1,9 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../actions/actionTypes';
+import {
+    ADD_INGREDIENT,
+    FETCH_INGREDIENTS_FAILED,
+    REMOVE_INGREDIENT,
+    SET_INGREDIENTS
+} from '../actions/actionTypes';
 
 import { BACON, CHEESE, MEAT, SALAD } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 
@@ -35,6 +40,19 @@ const reducer = (state = initialState, action) => {
                     [action.ingredientName] : state.ingredients[action.ingredientName] - 1
                 },
                 totalPrice : state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+            };
+
+        case SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients : action.ingredients,
+                error : false
+            };
+
+        case FETCH_INGREDIENTS_FAILED:
+            return {
+                ...state,
+                error : true
             };
 
         default:
