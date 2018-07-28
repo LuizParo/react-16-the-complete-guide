@@ -15,15 +15,7 @@ import axios from '../../axios-orders';
 
 class BurgerBuilder extends Component {
     state = {
-        purchasing : false,
-        loading : false,
-        error : false
-    }
-
-    componentDidMount() {
-        // axios.get('/ingredients.json')
-        //     .then(response => this.setState({ ingredients : response.data }))
-        //     .catch(_ => this.setState({ error : true }));
+        purchasing : false
     }
 
     updatePurchasedState = ingredients => {
@@ -47,7 +39,7 @@ class BurgerBuilder extends Component {
     }
 
     _renderOrderSummary() {
-        if (this.state.loading || !this.props.ingredients) {
+        if (!this.props.ingredients) {
             return <Spinner />;
         }
 
@@ -59,7 +51,7 @@ class BurgerBuilder extends Component {
 
     _renderBurger() {
         if (!this.props.ingredients) {
-            return this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
+            return this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
         }
 
         const disabledInfo = { ...this.props.ingredients };
