@@ -7,7 +7,7 @@ import Input from '../../../components/ui/Input/Input';
 import Spinner from '../../../components/ui/Spinner/Spinner';
 
 import {
-    purcheseBurgerStart
+    purchaseBurgerStart
 } from '../../../store/actions/orders';
 
 import axios from '../../../axios-orders';
@@ -201,7 +201,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onOrderBurger : order => dispatch(purcheseBurgerStart(order))
+    onOrderBurger : order => dispatch(purchaseBurgerStart(order))
 });
 
 export default connect(
