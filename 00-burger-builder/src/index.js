@@ -7,7 +7,7 @@ import reduxThunk from 'redux-thunk';
 
 import App from './App';
 
-import reducer from './store/reducers/burgerBuilder';
+import reducers from './store/reducers';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -16,7 +16,7 @@ import './index.css';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-    reducer,
+    reducers,
     composeEnhancers(applyMiddleware(reduxThunk))
 );
 
