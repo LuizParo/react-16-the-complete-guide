@@ -4,4 +4,8 @@ export {
     removeIngredient
 } from './burgerBuilder';
 
-export {} from './orders';
+export {
+    puchaseBurgerStart,
+    purcheseBurgerSuccess,
+    purcheseBurgerFail
+} from './orders';
