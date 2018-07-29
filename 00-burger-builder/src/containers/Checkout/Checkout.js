@@ -6,8 +6,6 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 
 import ContactData from './ContactData/ContactData';
 
-import { purchaseInit } from '../../store/actions/orders';
-
 class Checkout extends Component {
 
     checkoutCancelledHandler = () => {

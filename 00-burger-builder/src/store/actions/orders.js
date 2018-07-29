@@ -1,4 +1,7 @@
 import {
+    FETCH_ORDERS_FAIL,
+    FETCH_ORDERS_START,
+    FETCH_ORDERS_SUCCESS,
     PURCHASE_INIT,
     PURCHASE_BURGER_FAIL,
     PURCHASE_BURGER_START,
@@ -32,4 +35,34 @@ export const purchaseBurger = order => dispatch => {
     axios.post('/orders.json', order)
         .then(response => dispatch(purchaseBurgerSuccess(response.data.name, order)))
         .catch(error => dispatch(purchaseBurgerFail(error)));
+};
+
+export const fetchOrdersSuccess = orders => ({
+    type : FETCH_ORDERS_SUCCESS,
+    orders
+});
+
+export const fetchOrdersFail = error => ({
+    type : FETCH_ORDERS_FAIL,
+    error
+});
+
+export const fetchOrdersStart = () => ({
+    type : FETCH_ORDERS_START
+});
+
+export const fetchOrders = () => dispatch => {
+    dispatch(fetchOrdersStart());
+
+    axios.get('/orders.json')
+        .then(response => {
+            const fetchedOrders = [];
+
+            for (let key in response.data) {
+                fetchedOrders.push({ ...response.data[key], id : key });
+            }
+
+            dispatch(fetchOrdersSuccess(fetchedOrders));
+        })
+        .catch(error => dispatch(fetchOrdersFail(error)));
 };
