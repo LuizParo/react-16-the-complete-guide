@@ -1,10 +1,15 @@
 import {
+    PURCHASE_INIT,
     PURCHASE_BURGER_FAIL,
     PURCHASE_BURGER_START,
     PURCHASE_BURGER_SUCCESS
 } from './actionTypes';
 
 import axios from '../../axios-orders';
+
+export const purchaseInit = () => ({
+    type : PURCHASE_INIT
+});
 
 export const purchaseBurgerSuccess = (orderId, orderData) => ({
     type : PURCHASE_BURGER_SUCCESS,
