@@ -1,12 +1,12 @@
 import {
     PURCHASE_BURGER_FAIL,
-    PURCHASE_BURGER_SUCESS
+    PURCHASE_BURGER_SUCCESS
 } from './actionTypes';
 
 import axios from '../../axios-orders';
 
 export const purcheseBurgerSuccess = (orderId, orderData) => ({
-    type : PURCHASE_BURGER_SUCESS,
+    type : PURCHASE_BURGER_SUCCESS,
     orderId,
     orderData
 });
