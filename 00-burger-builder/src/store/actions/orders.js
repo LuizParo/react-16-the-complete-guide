@@ -1,5 +1,6 @@
 import {
     PURCHASE_BURGER_FAIL,
+    PURCHASE_BURGER_START,
     PURCHASE_BURGER_SUCCESS
 } from './actionTypes';
 
@@ -16,7 +17,13 @@ export const purchaseBurgerFail = error => ({
     error
 });
 
-export const purchaseBurgerStart = order => dispatch => {
+export const purchaseBurgerStart = order => dispatch => ({
+    type : PURCHASE_BURGER_START
+});
+
+export const purchaseBurger = order => dispatch => {
+    dispatch(purchaseBurgerStart());
+
     axios.post('/orders.json', order)
         .then(response => dispatch(purchaseBurgerSuccess(response.data, order)))
         .catch(error => dispatch(purchaseBurgerFail(error)));
