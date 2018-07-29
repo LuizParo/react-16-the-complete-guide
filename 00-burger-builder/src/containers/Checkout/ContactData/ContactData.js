@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import axios from '../../../axios-orders';
-
 import Button from '../../../components/ui/Button/Button';
 import Input from '../../../components/ui/Input/Input';
 import Spinner from '../../../components/ui/Spinner/Spinner';
@@ -111,13 +109,6 @@ class ContactData extends Component {
             price : this.props.price,
             orderData : formData
         };
-
-        axios.post('/orders.json', order)
-            .then(_ => {
-                this.setState({ loading : false });
-                this.props.history.push('/');
-            })
-            .catch(_ => this.setState({ loading : false }));
     }
 
     _checkValidity(value = '', rules = {}) {
