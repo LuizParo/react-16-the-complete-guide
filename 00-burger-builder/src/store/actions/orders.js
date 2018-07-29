@@ -5,19 +5,19 @@ import {
 
 import axios from '../../axios-orders';
 
-export const purcheseBurgerSuccess = (orderId, orderData) => ({
+export const purchaseBurgerSuccess = (orderId, orderData) => ({
     type : PURCHASE_BURGER_SUCCESS,
     orderId,
     orderData
 });
 
-export const purcheseBurgerFail = error => ({
+export const purchaseBurgerFail = error => ({
     type : PURCHASE_BURGER_FAIL,
     error
 });
 
-export const puchaseBurgerStart = order => dispatch => {
+export const purchaseBurgerStart = order => dispatch => {
     axios.post('/orders.json', order)
-        .then(response => dispatch(purcheseBurgerSuccess(response.data, order)))
-        .catch(error => dispatch(purcheseBurgerFail(error)));
+        .then(response => dispatch(purchaseBurgerSuccess(response.data, order)))
+        .catch(error => dispatch(purchaseBurgerFail(error)));
 };
