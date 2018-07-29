@@ -22,27 +22,35 @@ const initialState = {
     error : false
 };
 
+const addIngredient = (state, action) => {
+    const updatedIngredients = updateObject(state.ingredients, {
+        [action.ingredientName] : state.ingredients[action.ingredientName] + 1
+    });
+
+    return updateObject(state, {
+        ingredients : updatedIngredients,
+        totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+    });
+};
+
+const removeIngredient = (state, action) => {
+    const updatedIngredients = updateObject(state.ingredients, {
+        [action.ingredientName] : state.ingredients[action.ingredientName] - 1
+    });
+
+    return updateObject(state, {
+        ingredients : updatedIngredients,
+        totalPrice : state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+    });
+};
+
 const burgerBuilderReducer = (state = initialState, action) => {
     switch(action.type) {
-        case ADD_INGREDIENT: {
-            const updatedIngredients = updateObject(state.ingredients, {
-                [action.ingredientName] : state.ingredients[action.ingredientName] + 1
-            });
-            return updateObject(state, {
-                ingredients : updatedIngredients,
-                totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-            });
-        }
+        case ADD_INGREDIENT:
+            return addIngredient(state, action);
 
-        case REMOVE_INGREDIENT: {
-            const updatedIngredients = updateObject(state.ingredients, {
-                [action.ingredientName] : state.ingredients[action.ingredientName] - 1
-            });
-            return updateObject(state, {
-                ingredients : updatedIngredients,
-                totalPrice : state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
-            });
-        }
+        case REMOVE_INGREDIENT:
+            return removeIngredient(state, action);
 
         case SET_INGREDIENTS:
             return updateObject(state, {
