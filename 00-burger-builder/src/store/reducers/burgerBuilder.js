@@ -7,6 +7,8 @@ import {
 
 import { BACON, CHEESE, MEAT, SALAD } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 
+import { updateObject } from '../utility';
+
 const INGREDIENT_PRICES = {
     [SALAD] : 0.5,
     [CHEESE] : 0.4,
@@ -22,39 +24,35 @@ const initialState = {
 
 const burgerBuilderReducer = (state = initialState, action) => {
     switch(action.type) {
-        case ADD_INGREDIENT:
-            return {
-                ...state,
-                ingredients : {
-                    ...state.ingredients,
-                    [action.ingredientName] : state.ingredients[action.ingredientName] + 1
-                },
+        case ADD_INGREDIENT: {
+            const updatedIngredients = updateObject(state.ingredients, {
+                [action.ingredientName] : state.ingredients[action.ingredientName] + 1
+            });
+            return updateObject(state, {
+                ingredients : updatedIngredients,
                 totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-            };
+            });
+        }
 
-        case REMOVE_INGREDIENT:
-            return {
-                ...state,
-                ingredients : {
-                    ...state.ingredients,
-                    [action.ingredientName] : state.ingredients[action.ingredientName] - 1
-                },
+        case REMOVE_INGREDIENT: {
+            const updatedIngredients = updateObject(state.ingredients, {
+                [action.ingredientName] : state.ingredients[action.ingredientName] - 1
+            });
+            return updateObject(state, {
+                ingredients : updatedIngredients,
                 totalPrice : state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
-            };
+            });
+        }
 
         case SET_INGREDIENTS:
-            return {
-                ...state,
+            return updateObject(state, {
                 ingredients : action.ingredients,
                 totalPrice : 4,
                 error : false
-            };
+            });
 
         case FETCH_INGREDIENTS_FAILED:
-            return {
-                ...state,
-                error : true
-            };
+            return updateObject(state, { error : true });
 
         default:
             return state;
