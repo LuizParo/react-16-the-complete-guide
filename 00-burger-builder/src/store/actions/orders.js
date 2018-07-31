@@ -29,10 +29,10 @@ export const purchaseBurgerStart = () => ({
     type : PURCHASE_BURGER_START
 });
 
-export const purchaseBurger = order => dispatch => {
+export const purchaseBurger = (order, token) => dispatch => {
     dispatch(purchaseBurgerStart());
 
-    axios.post('/orders.json', order)
+    axios.post(`/orders.json?auth=${token}`, order)
         .then(response => dispatch(purchaseBurgerSuccess(response.data.name, order)))
         .catch(error => dispatch(purchaseBurgerFail(error)));
 };
@@ -51,10 +51,10 @@ export const fetchOrdersStart = () => ({
     type : FETCH_ORDERS_START
 });
 
-export const fetchOrders = () => dispatch => {
+export const fetchOrders = token => dispatch => {
     dispatch(fetchOrdersStart());
 
-    axios.get('/orders.json')
+    axios.get(`/orders.json?auth=${token}`)
         .then(response => {
             const fetchedOrders = [];
 

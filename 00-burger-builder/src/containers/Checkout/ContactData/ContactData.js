@@ -6,9 +6,7 @@ import Button from '../../../components/ui/Button/Button';
 import Input from '../../../components/ui/Input/Input';
 import Spinner from '../../../components/ui/Spinner/Spinner';
 
-import {
-    purchaseBurger
-} from '../../../store/actions/orders';
+import { purchaseBurger } from '../../../store/actions';
 
 import axios from '../../../axios-orders';
 
@@ -115,7 +113,7 @@ class ContactData extends Component {
             orderData : formData
         };
 
-        this.props.onOrderBurger(order);
+        this.props.onOrderBurger(order, this.props.token);
     }
 
     _checkValidity(value = '', rules = {}) {
@@ -197,11 +195,12 @@ class ContactData extends Component {
 const mapStateToProps = state => ({
     ingredients : state.burgerBuilder.ingredients,
     price : state.burgerBuilder.totalPrice,
-    loading : state.order.loading
+    loading : state.order.loading,
+    token : state.auth.token
 });
 
 const mapDispatchToProps = dispatch => ({
-    onOrderBurger : order => dispatch(purchaseBurger(order))
+    onOrderBurger : (order, token) => dispatch(purchaseBurger(order, token))
 });
 
 export default connect(
