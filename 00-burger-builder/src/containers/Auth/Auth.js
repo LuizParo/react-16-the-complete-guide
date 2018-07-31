@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Button from '../../components/ui/Button/Button';
@@ -123,6 +124,10 @@ class Auth extends Component {
     }
 
     render() {
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/" />
+        }
+
         if (this.props.loading) {
             return <Spinner />;
         }
@@ -147,7 +152,8 @@ class Auth extends Component {
 
 const mapStateToProps = state => ({
     loading : state.auth.loading,
-    error : state.auth.error
+    error : state.auth.error,
+    isAuthenticated : state.auth.token !== ''
 });
 
 const mapDispatchToProps = dispatch => ({

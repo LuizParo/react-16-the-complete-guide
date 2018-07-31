@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import NavigationItem from './NavigationItem/NavigationItem';
 
 import classes from './NavigationItems.css';
 
-const _renderAuthItem = isAuthenticated => {
-    return isAuthenticated
-        ? <NavigationItem link="/logout">Logout</NavigationItem>
-        : <NavigationItem link="/auth">Authenticate</NavigationItem>
+const _renderAuthItens = isAuthenticated => {
+    if (isAuthenticated) {
+        return (
+            <Fragment>
+                <NavigationItem link="/orders">Orders</NavigationItem>
+                <NavigationItem link="/logout">Logout</NavigationItem>
+            </Fragment>
+        );
+    }
+
+    return <NavigationItem link="/auth">Authenticate</NavigationItem>;
 };
 
 const NavigationItems = props => (
     <ul className={classes.NavigationItems}>
         <NavigationItem link="/" exact>Burger Builder</NavigationItem>
-        <NavigationItem link="/orders">Orders</NavigationItem>
-        {_renderAuthItem(props.isAuthenticated)}
+        {_renderAuthItens(props.isAuthenticated)}
     </ul>
 );
 
