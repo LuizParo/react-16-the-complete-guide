@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
     AUTH_FAIL,
+    AUTH_LOGOUT,
     AUTH_START,
     AUTH_SUCCESS
 } from './actionTypes';
@@ -21,6 +22,14 @@ export const authFail = error => ({
     error
 });
 
+export const logout = () => ({
+    type : AUTH_LOGOUT
+});
+
+export const checkAuthTimeout = expirationTime => dispatch => {
+    setTimeout(() => dispatch(logout()), expirationTime * 1000);
+};
+
 export const auth = (email, password, isSignup) => dispatch => {
     dispatch(authStart());
 
@@ -30,6 +39,9 @@ export const auth = (email, password, isSignup) => dispatch => {
         : `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${apiKey}`;
 
     axios.post(url, { email, password, returnSecureToken : true })
-        .then(response => dispatch(authSuccess(response.data.idToken, response.data.localId)))
+        .then(response => {
+            dispatch(authSuccess(response.data.idToken, response.data.localId));
+            dispatch(checkAuthTimeout(response.data.expiresIn));
+        })
         .catch(error => dispatch(authFail(error.response.data.error)));
 };
