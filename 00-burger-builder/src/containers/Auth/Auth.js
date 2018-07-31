@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Button from '../../components/ui/Button/Button';
 import Input from '../../components/ui/Input/Input';
+import Spinner from '../../components/ui/Spinner/Spinner';
 
 import { auth } from '../../store/actions';
 
@@ -115,9 +116,21 @@ class Auth extends Component {
         ));
     }
 
+    _renderErrorMessage = () => {
+        return this.props.error
+            ? <p>{this.props.error.message}</p>
+            : null;
+    }
+
     render() {
+        if (this.props.loading) {
+            return <Spinner />;
+        }
+
         return (
             <div className={classes.Auth}>
+                {this._renderErrorMessage()}
+
                 <form onSubmit={this.submitHandler}>
                     {this._renderInputs()}
                     <Button buttonType="Success">SUBMIT</Button>
@@ -132,11 +145,16 @@ class Auth extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    loading : state.auth.loading,
+    error : state.auth.error
+});
+
 const mapDispatchToProps = dispatch => ({
     onAuth : (email, password, isSignup) => dispatch(auth(email, password, isSignup))
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(withErrorHandler(Auth));
