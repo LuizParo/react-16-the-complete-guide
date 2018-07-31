@@ -98,8 +98,8 @@ class Auth extends Component {
 
     render() {
         return (
-            <div>
-                <form className={classes.Auth}>
+            <div className={classes.Auth}>
+                <form>
                     {this._renderInputs()}
                     <Button buttonType="Success">SUBMIT</Button>
                 </form>
