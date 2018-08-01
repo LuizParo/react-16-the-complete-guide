@@ -7,7 +7,13 @@ import Modal from '../../components/ui/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/ui/Spinner/Spinner';
 
-import { addIngredient, initIngredients, purchaseInit, removeIngredient } from '../../store/actions';
+import {
+    addIngredient,
+    initIngredients,
+    purchaseInit,
+    removeIngredient,
+    setAuthRedirectPath
+} from '../../store/actions';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
@@ -34,7 +40,7 @@ class BurgerBuilder extends Component {
         if (this.props.isAuthenticated) {
             return this.setState({ purchasing : true });
         }
-
+        this.props.onSetAuthRedirectPath('/checkout');
         this.props.history.push('/auth');
     }
 
@@ -108,7 +114,8 @@ const mapDispatchToProps = dispatch => ({
     onInitIngredients : () => dispatch(initIngredients()),
     onIngredientAdded : ingredientName => dispatch(addIngredient(ingredientName)),
     onIngredientRemoved : ingredientName => dispatch(removeIngredient(ingredientName)),
-    onInitPurchase : () => dispatch(purchaseInit())
+    onInitPurchase : () => dispatch(purchaseInit()),
+    onSetAuthRedirectPath : path => dispatch(setAuthRedirectPath(path))
 });
 
 export default connect(

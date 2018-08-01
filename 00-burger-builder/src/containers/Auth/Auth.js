@@ -6,7 +6,7 @@ import Button from '../../components/ui/Button/Button';
 import Input from '../../components/ui/Input/Input';
 import Spinner from '../../components/ui/Spinner/Spinner';
 
-import { auth } from '../../store/actions';
+import { auth, setAuthRedirectPath } from '../../store/actions';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
@@ -47,6 +47,12 @@ class Auth extends Component {
         },
         isSignup : true
     };
+
+    componentDidMount() {
+        if (!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
+            this.props.onSetAuthredirectPath();
+        }
+    }
 
     submitHandler = event => {
         event.preventDefault();
@@ -125,7 +131,7 @@ class Auth extends Component {
 
     render() {
         if (this.props.isAuthenticated) {
-            return <Redirect to="/" />
+            return <Redirect to={this.props.authRedirectPath} />
         }
 
         if (this.props.loading) {
@@ -153,11 +159,14 @@ class Auth extends Component {
 const mapStateToProps = state => ({
     loading : state.auth.loading,
     error : state.auth.error,
-    isAuthenticated : state.auth.token !== ''
+    isAuthenticated : state.auth.token !== '',
+    buildingBurger : state.burgerBuilder.building,
+    authRedirectPath : state.auth.redirectPath
 });
 
 const mapDispatchToProps = dispatch => ({
-    onAuth : (email, password, isSignup) => dispatch(auth(email, password, isSignup))
+    onAuth : (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
+    onSetAuthredirectPath : () => dispatch(setAuthRedirectPath('/'))
 });
 
 export default connect(

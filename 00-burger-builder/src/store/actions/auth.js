@@ -4,7 +4,8 @@ import {
     AUTH_FAIL,
     AUTH_LOGOUT,
     AUTH_START,
-    AUTH_SUCCESS
+    AUTH_SUCCESS,
+    SET_AUTH_REDIRECT_PATH
 } from './actionTypes';
 
 export const authStart = () => ({
@@ -29,6 +30,11 @@ export const logout = () => ({
 export const checkAuthTimeout = expirationTime => dispatch => {
     setTimeout(() => dispatch(logout()), expirationTime * 1000);
 };
+
+export const setAuthRedirectPath = path => ({
+    type : SET_AUTH_REDIRECT_PATH,
+    path
+});
 
 export const auth = (email, password, isSignup) => dispatch => {
     dispatch(authStart());

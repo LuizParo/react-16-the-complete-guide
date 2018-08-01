@@ -19,7 +19,8 @@ const INGREDIENT_PRICES = {
 const initialState = {
     ingredients : null,
     totalPrice : 4,
-    error : false
+    error : false,
+    building : false
 };
 
 const addIngredient = (state, action) => {
@@ -29,7 +30,8 @@ const addIngredient = (state, action) => {
 
     return updateObject(state, {
         ingredients : updatedIngredients,
-        totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+        totalPrice : state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+        building : true
     });
 };
 
@@ -40,7 +42,8 @@ const removeIngredient = (state, action) => {
 
     return updateObject(state, {
         ingredients : updatedIngredients,
-        totalPrice : state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+        totalPrice : state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+        building : true
     });
 };
 
@@ -56,7 +59,8 @@ const burgerBuilderReducer = (state = initialState, action) => {
             return updateObject(state, {
                 ingredients : action.ingredients,
                 totalPrice : 4,
-                error : false
+                error : false,
+                building : false
             });
 
         case FETCH_INGREDIENTS_FAILED:
