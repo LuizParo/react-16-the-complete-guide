@@ -8,7 +8,7 @@ import Spinner from '../../../components/ui/Spinner/Spinner';
 
 import { purchaseBurger } from '../../../store/actions';
 
-import { updateObject } from '../../../shared/utility';
+import { checkValidity, updateObject } from '../../../shared/utility';
 
 import axios from '../../../axios-orders';
 
@@ -119,30 +119,12 @@ class ContactData extends Component {
         this.props.onOrderBurger(order, this.props.token);
     }
 
-    _checkValidity(value = '', rules = {}) {
-        let isValid = true;
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        return isValid;
-    }
-
     inputChangedHandler = (event, inputIdentifier) => {
         const formElement = this.state.orderForm[inputIdentifier];
 
         const updatedFormElement = updateObject(formElement, {
             value : event.target.value,
-            valid : this._checkValidity(event.target.value, formElement.validation),
+            valid : checkValidity(event.target.value, formElement.validation),
             touched : true
         });
 
