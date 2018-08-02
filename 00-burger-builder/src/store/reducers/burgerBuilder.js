@@ -7,7 +7,7 @@ import {
 
 import { BACON, CHEESE, MEAT, SALAD } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 
-import { updateObject } from '../utility';
+import { updateObject } from '../../shared/utility';
 
 const INGREDIENT_PRICES = {
     [SALAD] : 0.5,

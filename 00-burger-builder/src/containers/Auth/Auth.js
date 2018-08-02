@@ -8,6 +8,8 @@ import Spinner from '../../components/ui/Spinner/Spinner';
 
 import { auth, setAuthRedirectPath } from '../../store/actions';
 
+import { updateObject } from '../../shared/utility';
+
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 import classes from './Auth.css';
@@ -87,16 +89,15 @@ class Auth extends Component {
 
     inputChangedHandler = (event, inputIdentifier) => {
         const inputValue = event.target.value;
+        const formElement = this.state.controls[inputIdentifier];
 
-        const updatedAuthForm = {
-            ...this.state.controls,
-            [inputIdentifier] : {
-                ...this.state.controls[inputIdentifier],
+        const updatedAuthForm = updateObject(this.state.controls, {
+            [inputIdentifier] : updateObject(formElement, {
                 value : inputValue,
-                valid : this._checkValidity(inputValue, this.state.controls[inputIdentifier].validation),
+                valid : this._checkValidity(inputValue, formElement.validation),
                 touched : true
-            }
-        };
+            })
+        });
 
         this.setState({ controls : updatedAuthForm });
     }
