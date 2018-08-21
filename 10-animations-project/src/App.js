@@ -24,7 +24,17 @@ class App extends Component {
         <button className="Button" onClick={() => this.setState(prevState => ({ showBlock : !prevState.showBlock }))}>Toggle</button>
         <br />
 
-        <Transition in={this.state.showBlock} timeout={1000} mountOnEnter unmountOnExit>
+        <Transition
+          in={this.state.showBlock}
+          timeout={1000}
+          onEnter={() => console.log('onEnter')}
+          onEntering={() => console.log('onEntering')}
+          onEntered={() => console.log('onEntered')}
+          onExit={() => console.log('onExit')}
+          onExiting={() => console.log('onExiting')}
+          onExited={() => console.log('onExited')}
+          mountOnEnter
+          unmountOnExit>
           {state => (
             <div style={{ backgroundColor: 'red', width: 100, height: 100, margin: 'auto', transition: 'all 1s ease-out', opacity: (state === 'exiting' ? 0 : 1) }}>
             </div>
