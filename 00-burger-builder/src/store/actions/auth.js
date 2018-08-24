@@ -34,7 +34,7 @@ export const logout = () => {
 };
 
 export const checkAuthTimeout = expirationTime => dispatch => {
-    setTimeout(() => dispatch(logout()), expirationTime * 1000);
+    //setTimeout(() => dispatch(logout()), expirationTime * 1000);
 };
 
 export const setAuthRedirectPath = path => ({
@@ -45,12 +45,12 @@ export const setAuthRedirectPath = path => ({
 export const authCheckState = () => dispatch => {
     const token = localStorage.getItem('token');
     if (!token) {
-        return dispatch(logout());
+        //return dispatch(logout());
     }
 
     const expirationDate = new Date(localStorage.getItem('expirationDate'));
     if (expirationDate <= new Date()) {
-        return dispatch(logout());
+        //return dispatch(logout());
     }
 
     const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000;
