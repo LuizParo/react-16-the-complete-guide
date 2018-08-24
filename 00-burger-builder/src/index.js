@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import App from './App';
 
-import { logout } from './store/sagas/auth';
+import { whatAuth } from './store/sagas';
 
 import reducers from './store/reducers';
 
@@ -27,7 +27,7 @@ const store = createStore(
     composeEnhancers(applyMiddleware(reduxThunk, sagaMiddleware))
 );
 
-//sagaMiddleware.run(logout);
+sagaMiddleware.run(whatAuth);
 
 ReactDOM.render(
     <Provider store={store}>
