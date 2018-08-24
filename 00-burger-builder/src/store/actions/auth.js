@@ -1,6 +1,5 @@
-import axios from 'axios';
-
 import {
+    AUTH,
     AUTH_CHECK_TIMEOUT,
     AUTH_FAIL,
     AUTH_INITIATE_LOGOUT,
@@ -10,9 +9,7 @@ import {
     SET_AUTH_REDIRECT_PATH
 } from './actionTypes';
 
-export const authStart = () => ({
-    type : AUTH_START
-});
+export const authStart = () => ({ type : AUTH_START });
 
 export const authSuccess = (token, userId) => ({
     type : AUTH_SUCCESS,
@@ -55,25 +52,9 @@ export const authCheckState = () => dispatch => {
     dispatch(checkAuthTimeout(expirationTime));
 };
 
-export const auth = (email, password, isSignup) => dispatch => {
-    dispatch(authStart());
-
-    const apiKey = 'AIzaSyBv27tQOpehxUYxl4jIjukKSxqm1q3BMc0';
-    const url = isSignup
-        ? `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${apiKey}`
-        : `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${apiKey}`;
-
-    axios.post(url, { email, password, returnSecureToken : true })
-        .then(response => {
-            const { idToken, expiresIn, localId } = response.data;
-            const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-
-            localStorage.setItem('token', idToken);
-            localStorage.setItem('expirationDate', expirationDate);
-            localStorage.setItem('userId', localId);
-
-            dispatch(authSuccess(idToken, localId));
-            dispatch(checkAuthTimeout(expiresIn));
-        })
-        .catch(error => dispatch(authFail(error.response.data.error)));
-};
+export const auth = (email, password, isSignup) => ({
+    type : AUTH,
+    email,
+    password,
+    isSignup
+});
