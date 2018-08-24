@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 import {
+    AUTH_CHECK_TIMEOUT,
     AUTH_FAIL,
     AUTH_INITIATE_LOGOUT,
+    AUTH_LOGOUT,
     AUTH_START,
     AUTH_SUCCESS,
     SET_AUTH_REDIRECT_PATH
@@ -23,18 +25,14 @@ export const authFail = error => ({
     error
 });
 
-export const logout = () => {
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('expirationDate');
-    // localStorage.removeItem('userId');
-    return {
-        type : AUTH_INITIATE_LOGOUT
-    };
-};
+export const logout = () => ({ type : AUTH_INITIATE_LOGOUT });
 
-export const checkAuthTimeout = expirationTime => dispatch => {
-    setTimeout(() => dispatch(logout()), expirationTime * 1000);
-};
+export const logoutSuceed = () => ({ type : AUTH_LOGOUT });
+
+export const checkAuthTimeout = expirationTime => ({
+    type : AUTH_CHECK_TIMEOUT,
+    expirationTime
+});
 
 export const setAuthRedirectPath = path => ({
     type : SET_AUTH_REDIRECT_PATH,
