@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import App from './App';
 
-import { whatAuth } from './store/sagas';
+import { watchAuth } from './store/sagas';
 
 import reducers from './store/reducers';
 
@@ -27,7 +27,7 @@ const store = createStore(
     composeEnhancers(applyMiddleware(reduxThunk, sagaMiddleware))
 );
 
-sagaMiddleware.run(whatAuth);
+sagaMiddleware.run(watchAuth);
 
 ReactDOM.render(
     <Provider store={store}>

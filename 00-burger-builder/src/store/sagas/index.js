@@ -4,6 +4,6 @@ import { logout } from './auth';
 
 import { AUTH_INITIATE_LOGOUT } from '../actions/actionTypes';
 
-export function* whatAuth() {
+export function* watchAuth() {
     yield takeEvery(AUTH_INITIATE_LOGOUT, logout);
 }
