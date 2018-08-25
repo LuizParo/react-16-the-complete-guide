@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import App from './App';
 
-import { watchAuth, watchBurgerBuilder } from './store/sagas';
+import { watchAuth, watchBurgerBuilder, watchOrders } from './store/sagas';
 
 import reducers from './store/reducers';
 
@@ -29,6 +29,7 @@ const store = createStore(
 
 sagaMiddleware.run(watchAuth);
 sagaMiddleware.run(watchBurgerBuilder);
+sagaMiddleware.run(watchOrders);
 
 ReactDOM.render(
     <Provider store={store}>

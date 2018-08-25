@@ -9,12 +9,16 @@ import {
 
 import { initIngredients } from './burgerBuilder';
 
+import { fetchOrders, purchaseBurger } from './orders';
+
 import {
     AUTH,
     AUTH_CHECK_STATE,
     AUTH_CHECK_TIMEOUT,
     AUTH_INITIATE_LOGOUT,
-    INIT_INGREDIENTS
+    FETCH_ORDERS,
+    INIT_INGREDIENTS,
+    PURCHASE_BURGER,
 } from '../actions/actionTypes';
 
 export function* watchAuth() {
@@ -26,4 +30,9 @@ export function* watchAuth() {
 
 export function* watchBurgerBuilder() {
     yield takeEvery(INIT_INGREDIENTS, initIngredients);
+}
+
+export function* watchOrders() {
+    yield takeEvery(FETCH_ORDERS, fetchOrders);
+    yield takeEvery(PURCHASE_BURGER, purchaseBurger);
 }

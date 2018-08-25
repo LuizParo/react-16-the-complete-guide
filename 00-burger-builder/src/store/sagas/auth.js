@@ -37,7 +37,7 @@ export function* authCheckState(_) {
 
     const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000;
     yield put(authSuccess(token, yield localStorage.getItem('userId')));
-    yield put(checkAuthTimeout(expirationTime));
+    yield put(checkAuthTimeoutSaga(expirationTime));
 }
 
 export function* auth(action) {
